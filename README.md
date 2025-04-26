@@ -28,7 +28,7 @@ Requirements
 
 How to Run
 ----------
-1. Open folder
+1. Open the system folder
 2. Run the Nscan system.EXE as Administrator
 
 
