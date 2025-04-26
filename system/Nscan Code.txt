@@ -1,0 +1,138 @@
+using System;
+using System.Diagnostics;
+//coded by Divino A. Cayanes | Agelica Peralta | BSIS-1C Computer Programming 2 123
+
+class Program
+{
+    static void Main()
+    {
+        
+        bool loggedIn = false;
+        while (!loggedIn)
+        {
+            Console.Clear();
+            Console.WriteLine("=== Login Required ===");
+            Console.Write("Username: ");
+            string username = Console.ReadLine();
+            Console.Write("Password: ");
+            string password = ReadPassword();
+
+            if (username == "admin" && password == "root")
+            {
+                loggedIn = true;
+            }
+            else
+            {
+                Console.WriteLine("\nInvalid credentials. Press any key to try again...");
+                Console.ReadKey();
+            }
+        }
+
+        
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("==== Nmap Scan Menu ====");
+            Console.WriteLine("1. Quick Scan");
+            Console.WriteLine("2. OS Detection");
+            Console.WriteLine("3. Version Detection");
+            Console.WriteLine("4. Full TCP Port Scan");
+            Console.WriteLine("5. Vulnerability Scan");
+            Console.WriteLine("6. Exit");
+            Console.Write("Choose an option: ");
+
+            string choice = Console.ReadLine()?.Trim();
+            if (choice == "6") break;
+
+            Console.Write("Enter target (e.g., scanme.nmap.org or 192.168.1.1): ");
+            string target = Console.ReadLine()?.Trim();
+
+            if (string.IsNullOrEmpty(target))
+            {
+                Console.WriteLine("Target cannot be empty. Press any key to continue...");
+                Console.ReadKey();
+                continue;
+            }
+
+            string args = choice switch
+            {
+                "1" => $"-T4 -F {target}",
+                "2" => $"-O {target}",
+                "3" => $"-sV {target}",
+                "4" => $"-p- {target}",
+                "5" => $"--script vuln {target}",
+                _ => null
+            };
+
+            if (args == null)
+            {
+                Console.WriteLine("Invalid option. Press any key to continue...");
+                Console.ReadKey();
+                continue;
+            }
+
+            Console.WriteLine($"\nRunning: nmap {args}\n");
+            try
+            {
+                string output = RunNmap(args);
+                Console.WriteLine("=== Scan Result ===\n");
+                Console.WriteLine(output);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error running Nmap: {ex.Message}");
+            }
+
+            Console.WriteLine("\nPress any key to continue...");
+            Console.ReadKey();
+        }
+    }
+
+    
+    static string ReadPassword()
+    {
+        string pass = "";
+        ConsoleKeyInfo key;
+        do
+        {
+            key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
+            {
+                pass = pass[0..^1];
+                Console.Write("\b \b");
+            }
+            else if (!char.IsControl(key.KeyChar))
+            {
+                pass += key.KeyChar;
+                Console.Write("*");
+            }
+        } while (key.Key != ConsoleKey.Enter);
+        Console.WriteLine();
+        return pass;
+    }
+
+    // Run Nmap command and capture output
+    static string RunNmap(string args)
+    {
+        var process = new Process
+        {
+            StartInfo = new ProcessStartInfo
+            {
+                FileName = "nmap",
+                Arguments = args,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            }
+        };
+
+        process.Start();
+        string output = process.StandardOutput.ReadToEnd();
+        string error = process.StandardError.ReadToEnd();
+        process.WaitForExit();
+
+        return string.IsNullOrEmpty(error) ? output : $"Nmap error:\n{error}";
+    }
+}
