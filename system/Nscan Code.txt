@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-//coded by D.C. | Agelica Peralta | BSIS-1C Computer Programming 2 123
+//coded by Dinz C. | Agelica Peralta | BSIS-1C Computer Programming 2 123
 
 class Program
 {
