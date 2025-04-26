@@ -112,7 +112,7 @@ class Program
         return pass;
     }
 
-    // Run Nmap command and capture output
+   
     static string RunNmap(string args)
     {
         var process = new Process
