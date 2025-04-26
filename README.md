@@ -1,5 +1,5 @@
 
-Coded by D.C. | Angelica Peralta | BSIS 1C - Computer Programming 2 123
+Coded by Dinz C. | Angelica Peralta | BSIS 1C - Computer Programming 2 123
 
 NScan system
 ========================
