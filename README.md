@@ -21,6 +21,7 @@ Features
 Requirements
 ------------
 - Windows OS
+- .NET 8.0 SDK or newer (Install Visual Studio 2015 or above)
 - Install Nmap. Open Powershell and run as Administrator > (run code: winget install nmap)
 - Nmap installed and added to system PATH 
 
@@ -28,6 +29,6 @@ Requirements
 How to Run
 ----------
 1. Open folder
-2. Run the Nscan System.EXE as Administrator
+2. Run the Nscan system.EXE as Administrator
 
 
