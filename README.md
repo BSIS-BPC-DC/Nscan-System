@@ -29,7 +29,7 @@ Requirements
 
 How to Run
 ----------
-1. https://github.com/BSIS-BPC-DC/Nscan-System.git or download the .zip file
+1. git clone https://github.com/BSIS-BPC-DC/Nscan-System.git or download the .zip file
 2. Open the system folder
 3. Run the Nscan system.EXE as Administrator
 
