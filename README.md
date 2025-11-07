@@ -1,5 +1,5 @@
 
-Coded by D. Cayanes | Angelica Peralta | BSIS 1C - Computer Programming 2 123
+Coded by D. Cayanes | Angelica Peralta | BSIS 1C - Computer Programming 2 123 | Programming Instructor Ms. Joana Marie Cruz 
 
 NScan system
 ========================
